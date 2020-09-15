@@ -1,0 +1,23 @@
+service: aws-telegram-chat-bot
+
+plugins:
+  - serverless-python-requirements
+provider:
+  name: aws
+  runtime: python3.8
+  stage: prod
+  region: eu-west-1
+  environment:
+    TELEGRAM_TOKEN: ${env:TELEGRAM_TOKEN}
+
+functions:
+  webhook:
+    handler: handler.webhook
+    description: "Webhook handler"
+    memorySize: 128
+    timeout: 30
+    events:
+      - http:
+          path: "${env:WEBHOOK_PATH, 'webhook'}"
+          method: post
+          cors: true

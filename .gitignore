@@ -1,0 +1,5 @@
+env
+.idea
+/corpus.txt
+package.json
+package-lock.json
